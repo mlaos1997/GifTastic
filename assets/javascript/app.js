@@ -36,11 +36,11 @@ animalButtons(animals);
 $('button').on('click', function() {
 	$('#animals').empty();
 	$('.header').empty();
-
 	var x = $(this).data("type");
 	$('.header').append("<h1>" + x + "</h1>")
 
 	var queryURL = "https://api.giphy.com/v1/gifs/search?q="+x+"&api_key=" + authKey + "&limit=10";
+
 
 
 //AJAX FUNCTION
@@ -55,15 +55,35 @@ $('button').on('click', function() {
 	for (var i = 0; i < 10; i++) {
 // Creating states for our images (Ex: Still, Animated) *DELETED COME BACK TO TOMORROW :)* YOU GOT THIS!!
 //=====================================================
-		$('#animals').append("<p>Rating: " + response.data[i].rating + "</p>")
-		$('#animals').append("<img src ='" + response.data[i].images.fixed_height_still.url + "'>");
+		var animated = response.data[i].images.fixed_height.url;
+		   var still = response.data[i].images.fixed_height_still.url;
+		var animalImage = $('<img>')
+		animalImage.attr("src", still);
+		animalImage.attr("data-still", still);
+		animalImage.attr("data-animate", animated);
+		animalImage.attr("data-state", "still");
+		animalImage.addClass("animal-image")
+
+
+	    $('#animals').append("<p>Rating: " + response.data[i].rating + "</p>");
+		$('#animals').append(animalImage);
+
 
 	};
-
 		});
-	
-
+		$(document).on("click", ".animal-image" ,function () {
+  			var state = $(this).attr("data-state");
+  			if (state === "still") {
+  				$(this).attr("src", $(this).attr("data-animate"));
+  				$(this).attr("data-state", "animate");
+  			} else {
+  				$(this).attr("src", $(this).attr("data-still"));
+  				$(this).attr("data-state", "still");
+  			}
+		})
   });
+
+// Here we will add img States, Still and animate
 
  // This function will add new animalBtns to our Array
  //================================================
