@@ -44,7 +44,7 @@ $('button').on('click', function() {
 	var x = $(this).data("type");
 	$('.header').append("<h1>" + x + "</h1>")
 
-	var queryURL = "https://api.giphy.com/v1/gifs/search?q="+x+"&api_key=" + authKey + "&limit=10";
+	var queryURL = "http://api.giphy.com/v1/gifs/search?q="+x+"&api_key=" + authKey + "&limit=10";
 
 //AJAX FUNCTION
 //==================================================
