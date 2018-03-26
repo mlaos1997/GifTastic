@@ -44,7 +44,7 @@ $('button').on('click', function() {
 	var x = $(this).data("type");
 	$('.header').append("<h1>" + x + "</h1>")
 
-	var queryURL = "http://api.giphy.com/v1/gifs/search?q="+x+"&api_key=" + authKey + "&limit=10";
+	var queryURL = "https://api.giphy.com/v1/gifs/search?q="+x+"&api_key=" + authKey + "&limit=10";
 
 //AJAX FUNCTION
 //==================================================
@@ -73,6 +73,12 @@ $('button').on('click', function() {
 	    $('#animals').append("<p>Rating: " + response.data[i].rating + "</p>");
 		$('#animals').append(animalImage);
 	};
+
+
+		});
+
+  });
+
 // This function will pause and start our images
 //====================================================
 		$(document).on("click", ".animal-image" ,function () {
@@ -84,13 +90,7 @@ $('button').on('click', function() {
   				$(this).attr("src", $(this).attr("data-still"));
   				$(this).attr("data-state", "still");
   			}
-		})
-
 		});
-
-  });
-
-
 
  // This function will add new animalBtns to our Array
  //================================================
